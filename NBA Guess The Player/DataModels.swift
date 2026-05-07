@@ -5,17 +5,21 @@
 //  Created by Student on 5/5/26.
 //
 
-struct GameResponse: Codable {
-    let data: [Game]
+
+import Foundation
+
+struct PlayerResponse: Codable {
+    let data: [Player]
 }
 
-struct Game: Codable, Identifiable {
+struct Player: Codable, Identifiable {
     let id: Int
-    let date: String
-    let home_team: Team
-    let visitor_team: Team
-    let home_team_score: Int
-    let visitor_team_score: Int
+    let first_name: String
+    let last_name: String
+    let position: String
+    let height_feet: Int?
+    let height_inches: Int?
+    let team: Team
 }
 
 struct Team: Codable {
