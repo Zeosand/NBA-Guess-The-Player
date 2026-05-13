@@ -27,7 +27,7 @@ struct ContentView: View {
                         if revealHints {
                             Text("Team: \(p.team.full_name)")
                             Text("Position: \(p.position.isEmpty ? "Unknown" : p.position)")
-                            Text("Height: \(p.height_feet ?? 0)'\(p.height_inches ?? 0)\"")
+                            Text("Height: \(p.heightFeet ?? 0)'\(p.heightInches ?? 0)\"")
                         } else {
                             Text("Hints Hidden")
                                 .foregroundStyle(.gray)
