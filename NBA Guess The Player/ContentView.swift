@@ -13,10 +13,17 @@ struct ContentView: View {
     @State private var guess = ""
     @State private var result = ""
     @State private var revealHints = false
+    @State private var revealAnswer = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
+                if revealAnswer, let p = network.currentPlayer {
+                    Text("Answer: \(p.first_name) \(p.last_name)")
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.blue)
+                }
 
                 if let p = network.currentPlayer {
                     VStack(spacing: 8) {
@@ -24,11 +31,19 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .bold()
 
-                        if revealHints {
-                            Text("Team: \(p.team.full_name)")
-                            Text("Position: \(p.position.isEmpty ? "Unknown" : p.position)")
-                            Text("Height: \(p.heightFeet ?? 0)'\(p.heightInches ?? 0)\"")
-                        } else {
+                        if revealHints, let p = network.currentPlayer {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("Team: \(p.team.full_name)")
+                                Text("Position: \(p.position.isEmpty ? "Unknown" : p.position)")
+                                Text("Height: \(p.heightFeet ?? 0)'\(p.heightInches ?? 0)\"")
+                                Text("Weight: \(p.weight ?? "Unknown") lbs")
+                                Text("College: \(p.college ?? "None")")
+                                Text("Country: \(p.country ?? "Unknown")")
+                                Text("Jersey: \(p.jersey_number ?? "Unknown")")
+                                Text("Draft: \(p.draft_year ?? 0) • Round \(p.draft_round ?? 0) • Pick \(p.draft_number ?? 0)")
+                            }
+                        }
+else {
                             Text("Hints Hidden")
                                 .foregroundStyle(.gray)
                         }
@@ -53,6 +68,10 @@ struct ContentView: View {
                 Button("Reveal Hints") {
                     revealHints = true
                 }
+                Button("Show Player") {
+                    revealAnswer = true
+                }
+
 
                 Button("Next Player") {
                     Task { await loadNewPlayer() }
@@ -73,6 +92,7 @@ struct ContentView: View {
         result = ""
         guess = ""
         revealHints = false
+        revealAnswer = false   // <-- reset answer
         await network.fetchRandomPlayer()
     }
 

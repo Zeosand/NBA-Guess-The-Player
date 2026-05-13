@@ -17,7 +17,14 @@ struct Player: Codable, Identifiable {
     let first_name: String
     let last_name: String
     let position: String
-    let height: String?   // <-- FIX
+    let height: String?
+    let weight: String?
+    let jersey_number: String?
+    let college: String?
+    let country: String?
+    let draft_year: Int?
+    let draft_round: Int?
+    let draft_number: Int?
     let team: Team
 }
 
