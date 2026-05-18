@@ -29,6 +29,7 @@ struct Player: Codable, Identifiable {
 }
 
 
+
 struct Team: Codable {
     let id: Int
     let full_name: String
