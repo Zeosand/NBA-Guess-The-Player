@@ -27,10 +27,6 @@ struct ContentView: View {
 
                 if let p = network.currentPlayer {
                     VStack(spacing: 8) {
-                        Text("Guess the NBA Player")
-                            .font(.largeTitle)
-                            .bold()
-
                         if revealHints, let p = network.currentPlayer {
                             VStack(alignment: .leading, spacing: 6) {
                                 Text("Team: \(p.team.full_name)")
@@ -81,7 +77,7 @@ else {
                 Spacer()
             }
             .padding()
-            .navigationTitle("NBA Guess")
+            .navigationTitle("NBA Guess the Player")
             .task {
                 await loadNewPlayer()
             }
