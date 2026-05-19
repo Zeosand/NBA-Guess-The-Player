@@ -109,7 +109,6 @@ struct ContentView: View {
                 Spacer()
             }
             .padding(.vertical)
-            .navigationTitle("NBA Guess")
             .task {
                 await loadNewPlayer()
             }
